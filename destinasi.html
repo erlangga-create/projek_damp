@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TravelGo - Destination</title>
+<style>
+  /* Import Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+  /* Reset and base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #fff9f2;
+    color: #1b1b1b;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  /* Container max width */
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(to bottom, #d6e5ff 0%, #eef5ff 100%);
+    z-index: 100;
+    padding: 16px 24px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.05);
+  }
+  .header-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  /* Logo area */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .logo img {
+    width: 36px;
+    height: 36px;
+  }
+  .logo-text {
+    color: #000;
+  }
+  .logo-highlight {
+    color: #0c71ff;
+  }
+
+  /* Nav links */
+  nav {
+    display: flex;
+    gap: 24px;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  nav a {
+    color: #1b1b1b;
+    padding: 6px 0;
+    position: relative;
+  }
+  nav a.active,
+  nav a:hover {
+    color: #0c71ff;
+    font-weight: 600;
+  }
+
+  /* Search bar with icon */
+  .search-wrapper {
+    flex-grow: 1;
+    max-width: 480px;
+    margin: 0 24px;
+    position: relative;
+  }
+  .search-wrapper input[type="search"] {
+    width: 100%;
+    height: 40px;
+    border:none;
+    border-radius: 20px;
+    padding: 0 44px 0 16px;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: inset 0 1px 4px rgb(19 172 254 / 0.25);
+    background: #f6f9ff;
+    transition: box-shadow 0.3s ease;
+  }
+  .search-wrapper input[type="search"]:focus {
+    box-shadow: inset 0 1px 6px rgb(19 172 254 / 0.6);
+  }
+  .search-wrapper .material-icons {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #707070;
+    font-size: 20px;
+    pointer-events: none;
+  }
+
+  /* Profile button */
+  .profile-btn {
+    background-color: #0c71ff;
+    color: white;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    min-width: 96px;
+    text-align: center;
+    font-size: 1rem;
+    user-select: none;
+    transition: background-color 0.25s ease;
+  }
+  .profile-btn:hover,
+  .profile-btn:focus {
+    background-color: #0659cc;
+    outline: none;
+  }
+
+  /* Destination tabs container */
+  .destinations-wrapper {
+    margin: 100px 0 60px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+  /* Arrow buttons */
+  .arrow-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #0c71ff;
+    cursor: pointer;
+    user-select: none;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+  }
+  .arrow-btn:focus {
+    outline-offset: 2px;
+    outline: 2px solid #0c71ff;
+  }
+
+  /* Destination tabs */
+  .destination-tab {
+    background-color: #0c71ff;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 24px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    min-width: 110px;
+    text-align: center;
+    user-select: none;
+    white-space: nowrap;
+    transition: background-color 0.25s ease;
+  }
+  .destination-tab:hover,
+  .destination-tab:focus {
+    background-color: #0659cc;
+    outline: none;
+  }
+
+  /* Category heading */
+  .category-title {
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 20px;
+    user-select: none;
+  }
+
+  /* Category buttons container - flex wrap */
+  .category-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    padding-bottom: 40px;
+  }
+  /* Category button base */
+  .category-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  /* Orange category */
+  .category-orange {
+    background-color: #f9be82;
+    color: #4a331b;
+  }
+  .category-orange:hover,
+  .category-orange:focus {
+    background-color: #f2a94d;
+    outline: none;
+  }
+  /* Green category */
+  .category-green {
+    background-color: #88B9A9;
+    color: #273a2e;
+  }
+  .category-green:hover,
+  .category-green:focus {
+    background-color: #6ea18b;
+    outline: none;
+  }
+
+  /* Category icons - using material icons + custom for some */
+  .category-icon {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1;
+    user-select: none;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Custom icons with SVG background for categories not found in material icons */
+  .icon-beach::before {
+    content: "🏖️";
+    font-size: 18px;
+  }
+  .icon-temple::before {
+    content: "🛕";
+    font-size: 18px;
+  }
+  .icon-camp::before {
+    content: "⛺";
+    font-size: 18px;
+  }
+  .icon-lake::before {
+    content: "🏞️";
+    font-size: 18px;
+  }
+  .icon-waterfall::before {
+    content: "💧";
+    font-size: 18px;
+  }
+
+  /* Section title + right aligned "Lihat Semua" link */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 0 20px 0;
+    padding: 0 10px;
+  }
+  .section-header h2 {
+    font-weight: 700;
+    font-size: 1.45rem;
+    user-select: none;
+  }
+  .see-all {
+    font-size: 0.9rem;
+    color: #0c71ff;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+  }
+  .see-all:hover,
+  .see-all:focus {
+    color: #0659cc;
+    outline: none;
+  }
+
+  /* Cards Grid container */
+  .card-grid {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  /* Desktop three-column grid */
+  @media (min-width: 768px) {
+    .card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  /* Mobile single column */
+  @media (max-width: 767px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Card */
+  .card {
+    background-color: #d7d7d7cc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(-4px);
+    outline: none;
+  }
+  .card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+  .card-body {
+    padding: 12px 16px 20px 16px;
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+  .card-location {
+    font-size: 0.9rem;
+    color: #2a2a2acc;
+    margin-bottom: 8px;
+  }
+
+  /* Rating container */
+  .card-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .star-icon {
+    color: #fed700;
+    font-size: 18px;
+    user-select: none;
+  }
+  .rating-number {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #444;
+  }
+
+
+  /* Footer */
+  footer {
+    background-color: #bbe1ff;
+    padding: 32px 24px;
+  }
+  .footer-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    min-width: 160px;
+    margin-bottom: 24px;
+  }
+  .footer-logo img {
+    width: 36px;
+    height: 36px;
+  }
+  .footer-logo-text {
+    color: #000;
+  }
+  .footer-logo-highlight {
+    color: #0c71ff;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    max-width: 480px;
+    flex-grow: 1;
+    font-weight: 600;
+  }
+  .footer-links a {
+    color: #123961;
+    font-size: 1rem;
+    user-select: none;
+  }
+  .footer-links a:hover,
+  .footer-links a:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+  .footer-contact {
+    font-weight: 600;
+    line-height: 1.5;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .footer-contact h3 {
+    font-weight: 700;
+    color: #123961;
+    margin: 0;
+  }
+  .footer-contact p {
+    margin: 0;
+  }
+  .social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background-color: #123961;
+    color: white;
+    font-size: 18px;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .social-icons a:hover,
+  .social-icons a:focus {
+    background-color: #0c71ff;
+    outline: none;
+  }
+
+  /* Material icons setup */
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v150/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+  }
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+</style>
+<!-- Material icons CDN -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="header-inner container" role="banner">
+      <a href="#" class="logo" aria-label="TravelGo Home" tabindex="0">
+        <img src="image/apa.webp" alt="TravelGo logo showing globe with waves" />
+        <span class="logo-text">Travel<span class="logo-highlight">Go</span></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#" tabindex="0">Home</a>
+        <a href="#" class="active" tabindex="0">Destination</a>
+        <a href="#" tabindex="0">About Us</a>
+        <a href="#" tabindex="0">Contact</a>
+      </nav>
+      <div class="search-wrapper" role="search">
+        <input type="search" placeholder="Search" aria-label="Search destinations" />
+        <span class="material-icons" aria-hidden="true">search</span>
+      </div>
+      <button class="profile-btn" aria-label="Profile and user options" tabindex="0">yance123</button>
+    </div>
+  </header>
+
+      <div class="destinations-wrapper" aria-label="Browse destinations">
+      <button class="arrow-btn" aria-label="Previous destinations" tabindex="0">
+        <span class="material-icons">chevron_left</span>
+      </button>
+      <button class="destination-tab" tabindex="0">Jawa Barat</button>
+      <button class="destination-tab" tabindex="0">Jawa Timur</button>
+      <button class="destination-tab" tabindex="0">Bali</button>
+      <button class="destination-tab" tabindex="0">NTB</button>
+      <button class="destination-tab" tabindex="0">Jawa Timur</button>
+      <button class="destination-tab" tabindex="0">Jawa Tengah</button>
+      <button class="destination-tab" tabindex="0">NTT</button>
+      <button class="destination-tab" tabindex="0">Lampung</button>
+      <button class="arrow-btn" aria-label="Next destinations" tabindex="0">
+        <span class="material-icons">chevron_right</span>
+      </button>
+    </div>
+  <main class="container" role="main">
+    <h3 class="category-title" id="category-label">Category</h3>
+    <div class="category-buttons" aria-labelledby="category-label" role="list">
+      <button class="category-btn category-orange" role="listitem" tabindex="0"><span class="category-icon icon-beach" aria-hidden="true"></span> Beach</button>
+      <button class="category-btn category-green" role="listitem" tabindex="0"><span class="category-icon material-icons">forest</span> Forest</button>
+      <button class="category-btn category-orange" role="listitem" tabindex="0"><span class="category-icon icon-temple" aria-hidden="true"></span> Temple</button>
+      <button class="category-btn category-green" role="listitem" tabindex="0"><span class="category-icon icon-camp" aria-hidden="true"></span> Camp</button>
+
+      <button class="category-btn category-orange" role="listitem" tabindex="0"><span class="category-icon material-icons">account_balance</span> Museum</button>
+      <button class="category-btn category-green" role="listitem" tabindex="0"><span class="category-icon icon-lake" aria-hidden="true"></span> Lake</button>
+      <button class="category-btn category-orange" role="listitem" tabindex="0"><span class="category-icon material-icons">terrain</span> Mountain</button>
+      <button class="category-btn category-green" role="listitem" tabindex="0"><span class="category-icon icon-waterfall" aria-hidden="true"></span> Waterfall</button>
+    </div>
+
+    <section aria-label="Rekomendasi destinations">
+      <div class="section-header">
+        <h2>Rekomendasi</h2>
+        <a href="#" class="see-all" tabindex="0">Lihat Semua</a>
+      </div>
+      <div class="card-grid">
+        <article class="card" tabindex="0" aria-label="Gunung Bromo, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="image/2.jpg" alt="View of Gunung Bromo mountain with morning mist and sun" />
+          <div class="card-body">
+            <div class="card-title">Gunung Bromo</div>
+            <div class="card-location">Jawa Timur, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Pantai Ngudel, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c248cf3c-5dc0-489f-a5ff-08cef056907e.png" alt="Bright blue beach and waves at Pantai Ngudel" />
+          <div class="card-body">
+            <div class="card-title">Pantai Ngudel</div>
+            <div class="card-location">Jawa Timur, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Tanah Lot, Bali, Indonesia, rating 4.5 stars">
+          <img src="image/tanah lot.jpg" alt="Tanah Lot temple by the sea with green plants" />
+          <div class="card-body">
+            <div class="card-title">Tanah Lot</div>
+            <div class="card-location">Bali, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0" aria-label="Pulau Lombok, NTB, Indonesia, rating 4.5 stars">
+          <img src="image/4.jpg" alt="Pulau Lombok island coastline with sandy white beach and hills" />
+          <div class="card-body">
+            <div class="card-title">Pulau Lombok</div>
+            <div class="card-location">NTB, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Gunung Gede, Jawa Barat, Indonesia, rating 4.5 stars">
+          <img src="image/5.jpg" alt="Gunung Gede forested mountain view from afar" />
+          <div class="card-body">
+            <div class="card-title">Gunung Gede</div>
+            <div class="card-location">Jawa Barat, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Pantai Nusa Dua, Bali, Indonesia, rating 4.5 stars">
+          <img src="image/6.jpg" alt="Pantai Nusa Dua beach with rocky formations and turquoise water" />
+          <div class="card-body">
+            <div class="card-title">Pantai Nusa Dua</div>
+            <div class="card-location">Bali, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-label="Wisata Populer destinations">
+      <div class="section-header">
+        <h2>Wisata Populer</h2>
+        <a href="#" class="see-all" tabindex="0">Lihat Semua</a>
+      </div>
+      <div class="card-grid">
+        <article class="card" tabindex="0" aria-label="Budug Asu, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="image/7.jpg" alt="Budug Asu mountain signpost in Java Timur, Indonesia" />
+          <div class="card-body">
+            <div class="card-title">Budug Asu</div>
+            <div class="card-location">Jawa Timur, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Pantai Tanjung Penyu, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="image/8.jpg" alt="Pantai Tanjung Penyu beach with palms and waves in Jawa Timur" />
+          <div class="card-body">
+            <div class="card-title">Pantai Tanjung Penyu</div>
+            <div class="card-location">Jawa Timur, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Ranu Kumbolo, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="image/1.jpg" alt="Ranu Kumbolo campsite near lake in Jawa Timur, Indonesia" />
+          <div class="card-body">
+            <div class="card-title">Ranu Kumbolo</div>
+            <div class="card-location">Jawa Timur, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0" aria-label="Pantai Nambung, NTB, Indonesia, rating 4.5 stars">
+          <img src="image/9.jpg" alt="Pantai Nambung waterfall coastal area in NTB, Indonesia" />
+          <div class="card-body">
+            <div class="card-title">Pantai Nambung</div>
+            <div class="card-location">NTB, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Kawah Putih, Jawa Barat, Indonesia, rating 4.5 stars">
+          <img src="image/10.jpg" alt="Kawah Putih volcanic lake with rocky landscape in Jawa Barat, Indonesia" />
+          <div class="card-body">
+            <div class="card-title">Kawah Putih</div>
+            <div class="card-location">Jawa Barat, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Pantai Kuta, Bali, Indonesia, rating 4.5 stars">
+          <img src="image/11.jpg" alt="Pantai Kuta beach with umbrellas and sunbeds in Bali" />
+          <div class="card-body">
+            <div class="card-title">Pantai Kuta</div>
+            <div class="card-location">Bali, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-container container">
+      <a href="#" class="footer-logo" aria-label="TravelGo Home" tabindex="0">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a63e8a0d-6086-458f-9e2c-f97262dc04fe.png" alt="TravelGo logo showing globe with waves" />
+        <span class="footer-logo-text">Travel<span class="footer-logo-highlight">Go</span></span>
+      </a>
+      <nav aria-label="Footer navigation" class="footer-links">
+        <a href="#" tabindex="0">Persyaratan Pengguna</a>
+        <a href="#" tabindex="0">Pernyataan Privasi dan Cookies</a>
+        <a href="#" tabindex="0">Cara Kerja Situs</a>
+        <a href="#" tabindex="0">Persetujuan Cookies</a>
+      </nav>
+      <address class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>+62 852-6168-8885</p>
+        <div class="social-icons" role="list" aria-label="Social media links">
+          <a href="#" role="listitem" aria-label="Facebook" tabindex="0">
+            <span class="material-icons" aria-hidden="true">facebook</span>
+          </a>
+          <a href="#" role="listitem" aria-label="Instagram" tabindex="0">
+            <span class="material-icons" aria-hidden="true">instagram</span>
+          </a>
+          <a href="#" role="listitem" aria-label="X Twitter" tabindex="0">
+            <span class="material-icons" aria-hidden="true">twitter</span>
+          </a>
+          <a href="#" role="listitem" aria-label="LinkedIn" tabindex="0">
+            <span class="material-icons" aria-hidden="true">linkedin</span>
+          </a>
+        </div>
+      </address>
+    </div>
+  </footer>
+</body>
+</html>
+

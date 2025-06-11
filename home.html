@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TravelGo - Discover Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* CSS Variables for colors and spacing */
+    :root {
+      --blue-primary: #2268f5;
+      --blue-muted: #a9c6ff;
+      --orange-primary: #f29428;
+      --gray-light: #f5f7fb;
+      --gray-medium: #c9c9c9;
+      --gray-dark: #2c3e50;
+      --font-family: 'Poppins', sans-serif;
+      --spacing-sm: 12px;
+      --spacing-md: 24px;
+      --spacing-lg: 40px;
+      --spacing-xl: 64px;
+      --border-radius: 16px;
+      --transition-fast: 0.3s ease;
+    }
+
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      background-color: white;
+      color: var(--gray-dark);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: var(--border-radius);
+      object-fit: cover;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border-radius: 12px;
+      border: none;
+      font-weight: 600;
+      transition: background-color var(--transition-fast);
+    }
+    button:focus {
+      outline-offset: 3px;
+      outline-color: var(--blue-primary);
+      outline-style: solid;
+      outline-width: 2px;
+    }
+
+    /* Utility and layout helpers */
+    .container {
+      width: 90%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .flex {
+      display: flex;
+      align-items: center;
+    }
+    .justify-between {
+      justify-content: space-between;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(180deg, #cce0fe 0%, #c7d9ff 100%);
+      box-shadow: 0 3px 10px rgba(34, 104, 245, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 10px 20px;
+    }
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 0;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--blue-primary);
+      gap: 6px;
+      user-select: none;
+    }
+    .logo img {
+      width: 32px;
+      height: 32px;
+    }
+    nav.primary-nav {
+      display: flex;
+      gap: 24px;
+      font-weight: 600;
+      font-size: 1rem;
+      flex-wrap: wrap;
+    }
+    nav.primary-nav a {
+      color: #1a1a1a;
+      padding: 8px 4px;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+    nav.primary-nav a:hover,
+    nav.primary-nav a:focus {
+      color: var(--blue-primary);
+    }
+    nav.primary-nav a.active {
+      color: var(--blue-primary);
+      font-weight: 700;
+    }
+    .header-actions {
+      display: flex;
+      gap: 16px;
+    }
+    .btn-login {
+      padding: 8px 20px;
+      background-color: var(--blue-primary);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      transition: background-color var(--transition-fast);
+    }
+    .btn-login:hover,
+    .btn-login:focus {
+      background-color: #1a50d0;
+    }
+    .btn-signup {
+      padding: 8px 20px;
+      background-color: transparent;
+      color: var(--blue-primary);
+      border: 2px solid var(--blue-primary);
+      font-weight: 600;
+      border-radius: 12px;
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    .btn-signup:hover,
+    .btn-signup:focus {
+      background-color: var(--blue-primary);
+      color: white;
+    }
+
+    /* Hero Section */
+.hero {
+  background: linear-gradient(180deg, #cce0fe 0%, #c7d9ff 100%);
+  overflow: hidden;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0; /* Pastikan margin 0 */
+  padding: 0; /* Pastikan padding 0 */
+  position: relative; /* Tambahkan ini */
+}
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  filter: brightness(1.05);
+  width: 100%; /* Tambahkan ini */
+  height: 100%; /* Tambahkan ini */
+  left: 0; /* Pastikan dimulai dari kiri */
+}
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+      align-items: center ;
+      max-width: 1400px;
+      width: 90%;
+      margin: 0 auto;
+    }
+    .hero-text {
+      color: var(--blue-primary);
+      font-weight: 700;
+      font-size: 2.2rem;
+      line-height: 1.2;
+    }
+    .hero-text strong {
+      display: block;
+      margin-bottom: 12px;
+    }
+    .hero-subtext {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #1a1a1a;
+      margin-top: 12px;
+      max-width: 350px;
+    }
+    .images-hero {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .images-hero .big-image {
+      width: 180px;
+      height: 280px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 16px rgb(34 104 245 / 0.2);
+      flex-shrink: 0;
+    }
+    .images-hero .small-images {
+      display: flex;
+      gap: 20px;
+      margin-top: 12px;
+    }
+    .images-hero .small-image {
+      width: 100px;
+      height: 140px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 6px 14px rgb(34 104 245 / 0.15);
+      flex-shrink: 0;
+    }
+
+    /* Section: About Us */
+    .section-about {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+      padding: var(--spacing-xl) 10vw var(--spacing-xl);
+      align-items: center;
+      background-color: var(--gray-light);
+      position: relative;
+      overflow: visible;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .about-image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(47, 79, 79, 0.15);
+    }
+    .about-image-wrapper img {
+      width: 100%;
+      height: 100%;
+    }
+    .background-shape {
+      position: absolute;
+      background-color: var(--blue-muted);
+      border-radius: 20px;
+      z-index: -1;
+    }
+    .shape-top-left {
+      width: 150px;
+      height: 150px;
+      top: -50px;
+      left: -50px;
+    }
+    .shape-bottom-right {
+      width: 120px;
+      height: 120px;
+      bottom: -30px;
+      right: -30px;
+    }
+    .about-content {
+      max-width: 600px;
+    }
+    .about-smalltitle {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--blue-primary);
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .about-smalltitle::after {
+      content: '';
+      width: 60px;
+      height: 3px;
+      background-color: var(--blue-primary);
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      border-radius: 2px;
+    }
+    .about-title {
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--gray-dark);
+      line-height: 1.3;
+    }
+    .about-desc {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #3a3a3a;
+      margin-bottom: 24px;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+    .btn-explore {
+      padding: 12px 32px;
+      background-color: var(--orange-primary);
+      color: white;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: background-color var(--transition-fast);
+      border: none;
+    }
+    .btn-explore:hover,
+    .btn-explore:focus {
+      background-color: #bb7612;
+    }
+    .about-stats {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .stat-card {
+      background-color: #f1f1f1;
+      padding: 16px 24px;
+      border-radius: 16px;
+      min-width: 120px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--gray-dark);
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(34, 104, 245, 0.075);
+      user-select: none;
+    }
+    .stat-card strong {
+      display: block;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    /* Section: Destination */
+    .section-destination {
+      background-color: var(--blue-muted);
+      padding: var(--spacing-xl) 10vw var(--spacing-xl);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .destination-header {
+      max-width: 800px;
+      margin: 0 auto 48px auto;
+      text-align: center;
+    }
+    .destination-smalltitle {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--gray-dark);
+      margin-bottom: 4px;
+      position: relative;
+      display: inline-block;
+    }
+    .destination-smalltitle::after {
+      content: '';
+      display: inline-block;
+      width: 60px;
+      height: 3px;
+      background-color: black;
+      margin-left: 12px;
+      vertical-align: middle;
+      border-radius: 2px;
+    }
+    .destination-title {
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: var(--orange-primary);
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+    .destination-desc {
+      font-weight: 400;
+      font-size: 1rem;
+      max-width: 600px;
+      color: var(--gray-dark);
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    /* Destination cards grid */
+    .destinations-grid {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .destination-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 16px rgb(34 104 245 / 0.1);
+      width: 280px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform var(--transition-fast);
+      user-select: none;
+    }
+    .destination-card:hover,
+    .destination-card:focus-within {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgb(34 104 245 / 0.3);
+    }
+    .destination-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .destination-info {
+      padding: 16px 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .destination-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: var(--gray-dark);
+    }
+    .destination-location {
+      font-size: 0.9rem;
+      color: gray;
+      margin-bottom: 12px;
+    }
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--orange-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .rating .material-icons {
+      font-size: 18px;
+      line-height: 18px;
+    }
+    .btn-view-more {
+      display: block;
+      margin: 0 auto;
+      padding: 14px 48px;
+      background-color: var(--orange-primary);
+      color: white;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      transition: background-color var(--transition-fast);
+      cursor: pointer;
+      max-width: 240px;
+    }
+    .btn-view-more:hover,
+    .btn-view-more:focus {
+      background-color: #bb7612;
+    }
+
+    /* Section: Reviews */
+    .section-reviews {
+      padding: var(--spacing-xl) 10vw var(--spacing-xl);
+      max-width: 1400px;
+      margin: 0 auto;
+      background-color: white;
+      overflow: visible;
+    }
+    .reviews-header {
+      max-width: 900px;
+      margin: 0 auto 32px auto;
+    }
+    .reviews-smalltitle {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--blue-primary);
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .reviews-smalltitle::after {
+      content: '';
+      width: 60px;
+      height: 3px;
+      background-color: var(--blue-primary);
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      border-radius: 2px;
+    }
+    .reviews-title {
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: var(--blue-primary);
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+    .reviews-desc {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #4a4a4a;
+      max-width: 720px;
+      line-height: 1.4;
+    }
+
+    /* Reviews slider container */
+    .reviews-slider {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .reviews-slider::-webkit-scrollbar {
+      height: 8px;
+    }
+    .reviews-slider::-webkit-scrollbar-thumb {
+      background-color: var(--gray-medium);
+      border-radius: 12px;
+    }
+    .review-card {
+      background: var(--gray-light);
+      border-radius: var(--border-radius);
+      min-width: 320px;
+      padding: 24px 24px 32px 24px;
+      box-sizing: border-box;
+      color: var(--gray-dark);
+      scroll-snap-align: start;
+      box-shadow: 0 6px 20px rgba(34, 104, 245, 0.05);
+      position: relative;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .review-header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .review-avatar {
+      background-color: var(--gray-medium);
+      color: white;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .review-username {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--blue-primary);
+    }
+    .review-text {
+      font-size: 0.95rem;
+      color: #3b3b3b;
+      line-height: 1.4;
+      font-style: italic;
+      white-space: pre-line;
+    }
+    .review-stars {
+      display: flex;
+      gap: 6px;
+      color: var(--orange-primary);
+    }
+    .review-stars .material-icons {
+      font-size: 20px;
+      line-height: 20px;
+    }
+
+    /* Review arrows */
+    .reviews-arrows {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .arrow-btn {
+      background: transparent;
+      border: 2px solid var(--gray-medium);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      color: var(--gray-medium);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .arrow-btn:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+    .arrow-btn:hover:not(:disabled),
+    .arrow-btn:focus:not(:disabled) {
+      background-color: var(--blue-primary);
+      border-color: var(--blue-primary);
+      color: white;
+      outline: none;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--blue-muted);
+      padding: var(--spacing-lg) 10vw var(--spacing-lg);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1400px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      color: var(--gray-dark);
+    }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: 480px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--blue-primary);
+    }
+    .footer-logo img {
+      width: 28px;
+      height: 28px;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 40px;
+      font-weight: 600;
+      user-select: none;
+    }
+    .footer-links a {
+      color: var(--gray-dark);
+      transition: color var(--transition-fast);
+    }
+    .footer-links a:hover,
+    .footer-links a:focus {
+      color: var(--blue-primary);
+      text-decoration: underline;
+    }
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 24px;
+      min-width: 220px;
+    }
+    .footer-contact {
+      font-weight: 600;
+      user-select: none;
+      text-align: right;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-socials a {
+      color: var(--gray-dark);
+      font-size: 1.3rem;
+      transition: color var(--transition-fast);
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-socials a:hover,
+    .footer-socials a:focus {
+      color: var(--blue-primary);
+    }
+    .material-icons.footer-icon {
+      font-size: 24px;
+    }
+
+    /* Responsive breakpoints */
+    @media (max-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .images-hero {
+        margin: 16px auto 0;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .images-hero .big-image {
+        width: 150px;
+        height: 230px;
+      }
+      .images-hero .small-image {
+        width: 90px;
+        height: 125px;
+      }
+      .section-about {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: var(--spacing-lg) 5vw var(--spacing-lg);
+      }
+      .about-content {
+        margin-top: 24px;
+      }
+      .about-stats {
+        justify-content: center;
+      }
+      .section-destination {
+        padding: var(--spacing-lg) 5vw var(--spacing-lg);
+      }
+      .destinations-grid {
+        justify-content: center;
+      }
+      .section-reviews {
+        padding: var(--spacing-lg) 5vw var(--spacing-lg);
+      }
+      footer {
+        justify-content: center;
+        gap: 32px;
+        font-size: 0.85rem;
+        text-align: center;
+      }
+      .footer-left, .footer-right {
+        align-items: center;
+        max-width: 100%;
+      }
+      .footer-right {
+        text-align: center;
+      }
+      .footer-contact {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-container {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .header-actions {
+        width: 100%;
+        justify-content: center;
+      }
+      .btn-login,
+      .btn-signup {
+        flex-grow: 1;
+        max-width: 140px;
+      }
+      .hero-text {
+        font-size: 1.5rem;
+      }
+      .about-title {
+        font-size: 1.3rem;
+      }
+      .destination-title {
+        font-size: 1.3rem;
+      }
+      .destinations-grid {
+        gap: 16px;
+      }
+      .destination-card {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .reviews-slider {
+        padding: 0 6px;
+      }
+      .review-card {
+        min-width: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container container" role="banner">
+      <a href="#" class="logo" aria-label="TravelGo Homepage">
+        <img src="image/apa.webp" alt="TravelGo logo" />
+        TravelGo
+      </a>
+      <nav class="primary-nav" role="navigation" aria-label="Primary Navigation">
+        <a href="#" class="active" aria-current="page">Home</a>
+        <a href="#destination-section">Destination</a>
+        <a href="#about-section">About Us</a>
+        <a href="#contact-section">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-login" type="button">Login</button>
+        <button class="btn-signup" type="button">Sign Up</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" aria-label="Hero section with main call to action">
+      <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/59301303-281a-4a96-94d5-7aff970121ee.png" alt="Calm lake and mountain landscape in Indonesia" class="hero-bg-image" aria-hidden="true" />
+      <div class="hero-content">
+        <div class="hero-text">
+          <strong>Discover Your Next Great Journey in Indonesia</strong>
+          <p class="hero-subtext">Rencanakan perjalanan impian Anda dan temukan tempat terindah di seluruh Indonesia.</p>
+        </div>
+        <div class="images-hero" role="group" aria-label="Featured destination images">
+          <div class="big-image">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a399e715-7102-4a82-ad18-50723dd73d19.png" alt="Traditional Gate of Heaven with blue sky and woman wearing yellow" />
+          </div>
+          <div class="small-images">
+            <div class="small-image">
+              <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/430c1ade-5d1c-417a-a618-8ae74e1a64b2.png" alt="Tropical beach landscape with clear blue sky" />
+            </div>
+            <div class="small-image">
+              <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/29b1d4a4-086f-44f4-9a8c-e443803e98f2.png" alt="Mountain view with unique tree on foreground" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about-section" class="section-about" aria-labelledby="about-title">
+      <div class="about-image-wrapper" aria-hidden="true">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6e7c39ab-f997-43c2-94d0-fe3919c91d7f.png" alt="Lush waterfall surrounded by forest mist in Indonesia" />
+        <div class="background-shape shape-top-left"></div>
+        <div class="background-shape shape-bottom-right"></div>
+      </div>
+      <div class="about-content">
+        <h2 id="about-title" class="about-smalltitle">About Us</h2>
+        <h3 class="about-title">Kami Merekomendasikan Destinasi Wisata Indah di Indonesia</h3>
+        <p class="about-desc">
+          Mari temukan destinasi impianmu di Indonesia.
+          Kami akan merekomendasikan tempat yang menakjubkan dan perjalanan hemat bersama orang-orang tersayang.
+        </p>
+        <button class="btn-explore" type="button">Explore Now</button>
+        <div class="about-stats">
+          <div class="stat-card">
+            <strong>100+</strong> Destinasi Lokal
+          </div>
+          <div class="stat-card">
+            <strong>200+</strong> Wisatawan Puas
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destination Section -->
+    <section id="destination-section" class="section-destination" aria-labelledby="destination-title">
+      <header class="destination-header">
+        <h2 class="destination-smalltitle">Destination</h2>
+        <h3 id="destination-title" class="destination-title">Lihat Semua Destinasi Menarik</h3>
+        <p class="destination-desc">
+        Temukan berbagai tempat wisata yang memukau — mulai dari pantai eksotis, pegunungan menawan, hingga budaya lokal yang kaya. Jelajahi destinasi impianmu dan wujudkan liburan tak terlupakan bersama kami.
+        </p>
+      </header>
+      <div class="destinations-grid">
+        <article class="destination-card" tabindex="0" aria-label="Destination Gunung Bromo, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0e2a9754-87ea-4e6a-b437-44065ad8a599.png" alt="Gunung Bromo mountain view in Jawa Timur, Indonesia" />
+          <div class="destination-info">
+            <h4 class="destination-name">Gunung Bromo</h4>
+            <p class="destination-location">Jawa Timur, Indonesia</p>
+            <div class="rating" aria-label="Rating 4.5 out of 5 stars">
+              <span class="material-icons" aria-hidden="true">star</span>
+              <span>4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="destination-card" tabindex="0" aria-label="Destination Pantai Ngudel, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7a88d428-6481-4fb6-af36-47eff48bf7c5.png" alt="Clear blue sky and sea at Pantai Ngudel, Jawa Timur, Indonesia" />
+          <div class="destination-info">
+            <h4 class="destination-name">Pantai Ngudel</h4>
+            <p class="destination-location">Jawa Timur, Indonesia</p>
+            <div class="rating" aria-label="Rating 4.5 out of 5 stars">
+              <span class="material-icons" aria-hidden="true">star</span>
+              <span>4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="destination-card" tabindex="0" aria-label="Destination Tanah Lot, Bali, Indonesia, rating 4.5 stars">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/15175982-323f-4480-a938-9ab4f4ee05ea.png" alt="Tanah Lot cliff temple surrounded by ocean in Bali, Indonesia" />
+          <div class="destination-info">
+            <h4 class="destination-name">Tanah Lot</h4>
+            <p class="destination-location">Bali, Indonesia</p>
+            <div class="rating" aria-label="Rating 4.5 out of 5 stars">
+              <span class="material-icons" aria-hidden="true">star</span>
+              <span>4.5</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <button class="btn-view-more" type="button" aria-label="View more destinations">View More</button>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section-reviews" aria-labelledby="reviews-title" aria-describedby="reviews-desc">
+      <header class="reviews-header">
+        <h2 class="reviews-smalltitle">Review Pengguna</h2>
+        <h3 id="reviews-title" class="reviews-title">Ulasan dari Pengguna Kami</h3>
+        <p id="reviews-desc" class="reviews-desc">
+          Kami berkomitmen memberikan layanan terbaik dalam setiap perjalanan.
+          Berikut beberapa ulasan dari pengguna yang telah mempercayakan perjalanannya kepada kami.
+        </p>
+      </header>
+
+      <div class="reviews-slider" tabindex="0" aria-label="User reviews carousel">
+        <article class="review-card">
+          <div class="review-header">
+            <div class="review-avatar" aria-hidden="true">
+              <span class="material-icons" aria-hidden="true">person</span>
+            </div>
+            <strong class="review-username">yanceadp123</strong>
+          </div>
+          <p class="review-text">
+            "Destination di TravelGo lengkap dan mudah diakses. Bikin rencana jalan-jalan jadi praktis dan jelas!"
+          </p>
+          <div class="review-stars" aria-label="5 stars rating">
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+          </div>
+        </article>
+        <article class="review-card">
+          <div class="review-header">
+            <div class="review-avatar" aria-hidden="true">
+              <span class="material-icons" aria-hidden="true">person</span>
+            </div>
+            <strong class="review-username">erlanggatf007</strong>
+          </div>
+          <p class="review-text">
+            "Rekomendasi destinasi yang ramah keluarga sangat membantu kami memilih tempat liburan yang seru dan aman."
+          </p>
+          <div class="review-stars" aria-label="5 stars rating">
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+          </div>
+        </article>
+        <article class="review-card">
+          <div class="review-header">
+            <div class="review-avatar" aria-hidden="true">
+              <span class="material-icons" aria-hidden="true">person</span>
+            </div>
+            <strong class="review-username">yancesi213</strong>
+          </div>
+          <p class="review-text">
+            "Fitur Destination up-to-date dan detail banget, terutama buat saya yang suka wisata alam dan petualangan."
+          </p>
+          <div class="review-stars" aria-label="5 stars rating">
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+          </div>
+        </article>
+      </div>
+      <div class="reviews-arrows" aria-hidden="true">
+        <button type="button" class="arrow-btn" aria-label="Previous review" disabled>
+          <span class="material-icons">chevron_left</span>
+        </button>
+        <button type="button" class="arrow-btn" aria-label="Next review">
+          <span class="material-icons">chevron_right</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer aria-label="Site footer" id="contact-section">
+    <div class="footer-left">
+      <a href="#" class="footer-logo" aria-label="TravelGo Homepage">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ae040da0-6174-452a-92b3-627a561d3575.png" alt="TravelGo logo" />
+        TravelGo
+      </a>
+      <nav class="footer-links" aria-label="Footer site links">
+        <a href="#persyaratan">Persyaratan Pengguna</a>
+        <a href="#privasi">Pernyataan Privasi dan Cookies</a>
+        <a href="#cara-kerja">Cara Kerja Situs</a>
+        <a href="#persetujuan">Persetujuan Cookies</a>
+      </nav>
+    </div>
+    <div class="footer-right">
+      <address class="footer-contact" aria-label="Contact Information" role="contentinfo">
+        Contact Us<br />
+        <a href="tel:+6285261688885" aria-label="Phone number +62 852 6168 8885">+62 852-6168-8885</a>
+      </address>
+      <div class="footer-socials" role="list" aria-label="Social media links">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" role="listitem">
+          <span class="material-icons footer-icon" aria-hidden="true">facebook</span>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" role="listitem">
+          <span class="material-icons footer-icon" aria-hidden="true">instagram</span>
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" role="listitem">
+          <span class="material-icons footer-icon" aria-hidden="true">twitter</span>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" role="listitem">
+          <span class="material-icons footer-icon" aria-hidden="true">linkedin</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
