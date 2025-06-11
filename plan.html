@@ -1,0 +1,305 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   TravelGo - MyTrip Plans
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #fff9f2;
+    color: #1b1b1b;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+
+  .card-grid {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  @media (min-width: 768px) {
+    .card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 767px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Card */
+  .card {
+    background-color: #d7d7d7cc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(-4px);
+    outline: none;
+  }
+  .card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+  .card-body {
+    padding: 12px 16px 20px 16px;
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+  .card-location {
+    font-size: 0.9rem;
+    color: #2a2a2acc;
+    margin-bottom: 8px;
+  }
+
+  /* Rating container */
+  .card-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .star-icon {
+    color: #fed700;
+    font-size: 18px;
+    user-select: none;
+  }
+  .rating-number {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #444;
+  }
+
+
+  /* Footer */
+  footer {
+    background-color: #bbe1ff;
+    padding: 32px 24px;
+  }
+  .footer-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    min-width: 160px;
+    margin-bottom: 24px;
+  }
+  .footer-logo img {
+    width: 36px;
+    height: 36px;
+  }
+  .footer-logo-text {
+    color: #000;
+  }
+  .footer-logo-highlight {
+    color: #0c71ff;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    max-width: 480px;
+    flex-grow: 1;
+    font-weight: 600;
+  }
+  .footer-links a {
+    color: #123961;
+    font-size: 1rem;
+    user-select: none;
+  }
+  .footer-links a:hover,
+  .footer-links a:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+  .footer-contact {
+    font-weight: 600;
+    line-height: 1.5;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .footer-contact h3 {
+    font-weight: 700;
+    color: #123961;
+    margin: 0;
+  }
+  .footer-contact p {
+    margin: 0;
+  }
+  .social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background-color: #123961;
+    color: white;
+    font-size: 18px;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .social-icons a:hover,
+  .social-icons a:focus {
+    background-color: #0c71ff;
+    outline: none;
+  }
+
+  /* Material icons setup */
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v150/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+  }
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+  </style>
+ </head>
+ <body class="bg-white text-black">
+  <header class="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
+   <div class="flex items-center space-x-3">
+    <img alt="TravelGo logo with circle containing mountains and plane" class="w-12 h-12" height="48" src="image/apa.webp" width="48"/>
+    <span class="font-bold text-xl">
+     TravelGo
+    </span>
+   </div>
+   <nav class="flex space-x-10 text-base font-semibold">
+    <a class="text-black" href="#">
+     Destination
+    </a>
+    <a class="text-blue-600" href="#">
+     Travel Plan
+    </a>
+    <a class="text-black" href="#">
+     Help
+    </a>
+    <a class="text-black" href="#">
+     Home
+    </a>
+   </nav>
+  </header>
+  <main class="max-w-7xl mx-auto px-8">
+   <h1 class="text-3xl font-extrabold text-center mb-12">
+    MyTrip Plans
+   </h1>
+       <div class="card-grid">
+        <article class="card" tabindex="0" aria-label="Gunung Bromo, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="image/2.jpg" alt="View of Gunung Bromo mountain with morning mist and sun" />
+          <div class="card-body">
+            <div class="card-title">Gunung Bromo</div>
+            <div class="card-location">Jawa Timur, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Pantai Ngudel, Jawa Timur, Indonesia, rating 4.5 stars">
+          <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c248cf3c-5dc0-489f-a5ff-08cef056907e.png" alt="Bright blue beach and waves at Pantai Ngudel" />
+          <div class="card-body">
+            <div class="card-title">Pantai Ngudel</div>
+            <div class="card-location">Jawa Timur, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" tabindex="0" aria-label="Tanah Lot, Bali, Indonesia, rating 4.5 stars">
+          <img src="image/tanah lot.jpg" alt="Tanah Lot temple by the sea with green plants" />
+          <div class="card-body">
+            <div class="card-title">Tanah Lot</div>
+            <div class="card-location">Bali, Indonesia</div>
+            <div class="card-rating" aria-label="Rating 4.5">
+              <span class="star-icon material-icons" aria-hidden="true">star</span><span class="rating-number">4.5</span>
+            </div>
+          </div>
+        </article>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer-container container">
+      <a href="#" class="footer-logo" aria-label="TravelGo Home" tabindex="0">
+        <img src="image/apa.webp" alt="TravelGo logo showing globe with waves" />
+        <span class="footer-logo-text">Travel<span class="footer-logo-highlight">Go</span></span>
+      </a>
+      <nav aria-label="Footer navigation" class="footer-links">
+        <a href="#" tabindex="0">Persyaratan Pengguna</a>
+        <a href="#" tabindex="0">Pernyataan Privasi dan Cookies</a>
+        <a href="#" tabindex="0">Cara Kerja Situs</a>
+        <a href="#" tabindex="0">Persetujuan Cookies</a>
+      </nav>
+      <address class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>+62 852-6168-8885</p>
+        <div class="social-icons" role="list" aria-label="Social media links">
+          <a href="#" role="listitem" aria-label="Facebook" tabindex="0">
+            <span class="material-icons" aria-hidden="true">facebook</span>
+          </a>
+          <a href="#" role="listitem" aria-label="Instagram" tabindex="0">
+            <span class="material-icons" aria-hidden="true">instagram</span>
+          </a>
+          <a href="#" role="listitem" aria-label="X Twitter" tabindex="0">
+            <span class="material-icons" aria-hidden="true">twitter</span>
+          </a>
+          <a href="#" role="listitem" aria-label="LinkedIn" tabindex="0">
+            <span class="material-icons" aria-hidden="true">linkedin</span>
+          </a>
+        </div>
+      </address>
+    </div>
+  </footer>
+ </body>
+</html>
